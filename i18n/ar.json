@@ -1,6 +1,9 @@
 {
     "title": "Employee",
     "appname": "Employee",
+    "loginscreen": "Login",
+    "username": "Username",
+    "password": "Password",
     "about": "About",
     "settings": "Settings",
     "donate": "Donate",

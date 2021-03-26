@@ -68,9 +68,119 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text(
-                      getLocaleName.translate(
-                        LocaleKeys.netactiveKey,
+                    child: Form(
+                      child: Column(
+                        children: [
+                          Text(
+                            getLocaleName.translate(
+                              LocaleKeys.loginnameKey,
+                            ),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 26.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              15.0,
+                              20.0,
+                              15.0,
+                              10.0,
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                hintText: getLocaleName
+                                    .translate(LocaleKeys.usernameKey),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              15.0,
+                              20.0,
+                              15.0,
+                              10.0,
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                hintText: getLocaleName
+                                    .translate(LocaleKeys.passwordKey),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              15.0,
+                              20.0,
+                              15.0,
+                              10.0,
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                hintText: getLocaleName
+                                    .translate(LocaleKeys.passwordKey),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              15.0,
+                              20.0,
+                              15.0,
+                              10.0,
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              color: Colors.pink,
+                              height: 50.0,
+                              minWidth: 120.0,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
