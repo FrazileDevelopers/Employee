@@ -1,3 +1,5 @@
+import 'package:employee/pages/addemployee/addemp.dart';
+import 'package:employee/pages/employees/employees.dart';
 import 'package:flutter/material.dart';
 import '../pages/home/home.dart';
 import '../constants/constants.dart';
@@ -9,6 +11,17 @@ class Routers {
         return MaterialPageRoute(
           builder: (_) => HomePage(),
         );
+
+      case Constants.addemp:
+        return MaterialPageRoute(
+          builder: (_) => AddEmployee(),
+        );
+
+      case Constants.employees:
+        return MaterialPageRoute(
+          builder: (_) => Employees(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

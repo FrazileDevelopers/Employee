@@ -1,4 +1,7 @@
+import 'package:employee/constants/constants.dart';
+import 'package:employee/validations/fzvalidations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../providers/GoogleMobileAds.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../constants/localeKeys.dart';
@@ -15,6 +18,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BannerAd banner;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
 
   @override
   void didChangeDependencies() {
@@ -61,7 +76,6 @@ class _HomePageState extends State<HomePage> {
               )
               .capitalize(),
         ),
-        centerTitle: true,
       ),
       body: internetStatus.status
           ? Column(
@@ -69,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: Center(
                     child: Form(
+                      key: _formKey,
                       child: Column(
                         children: [
                           Text(
@@ -89,6 +104,8 @@ class _HomePageState extends State<HomePage> {
                               10.0,
                             ),
                             child: TextFormField(
+                              controller: usernameController,
+                              keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -105,6 +122,9 @@ class _HomePageState extends State<HomePage> {
                                 hintText: getLocaleName
                                     .translate(LocaleKeys.usernameKey),
                               ),
+                              onSaved: (username) => {},
+                              validator: (username) =>
+                                  FzValidation.emailValidator(username),
                             ),
                           ),
                           Padding(
@@ -115,6 +135,9 @@ class _HomePageState extends State<HomePage> {
                               10.0,
                             ),
                             child: TextFormField(
+                              controller: passwordController,
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -131,32 +154,9 @@ class _HomePageState extends State<HomePage> {
                                 hintText: getLocaleName
                                     .translate(LocaleKeys.passwordKey),
                               ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              15.0,
-                              20.0,
-                              15.0,
-                              10.0,
-                            ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                hintText: getLocaleName
-                                    .translate(LocaleKeys.passwordKey),
-                              ),
+                              onSaved: (pass) => {},
+                              validator: (pass) =>
+                                  FzValidation.passwordValidator(pass),
                             ),
                           ),
                           Padding(
@@ -167,7 +167,15 @@ class _HomePageState extends State<HomePage> {
                               10.0,
                             ),
                             child: MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.hide');
+                                if (validateAndSave()) {
+                                  print('Login Validated');
+                                  Navigator.pushNamed(
+                                      context, Constants.addemp);
+                                }
+                              },
                               child: Text(
                                 'Login',
                                 style: TextStyle(
